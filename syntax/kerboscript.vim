@@ -20,7 +20,7 @@ syn keyword kerboBoolean true false on off
 hi def link kerboBoolean Boolean
 
 " obvious syntax errors
-syntax match MissingPoint ".*[^\.^\{^\}]\s*$"
+syntax match MissingPoint ".*[^\.^\{^\}^\(^\,]\s*$"
 hi link MissingPoint Error
 
 " Empty lines are fine
@@ -148,7 +148,7 @@ syn keyword kerboScienceAttr title sciencevalue transmitvalue dataamount deploy 
 hi def link kerboScienceAttr Label
 
 " Staging attributes
-syn keyword kerboStageAttr ready number resources resourceslex nextdecoupler nextseparator deltav 	deltav
+syn keyword kerboStageAttr ready number resources resourceslex nextdecoupler nextseparator deltav
 hi def link kerboStageAttr Label
 
 " Vessel attributes
@@ -173,7 +173,7 @@ hi def link kerboVariousAttr Label
 
 " Container attributes
 syn keyword kerboContainerAttr add atend case casesensitive clear copy dump empty find findlast haskey hassuffix hasvalue index indexof insert iterator join keys lastindexof length next peek pop push remove reset reverseiterator start step stop sublist suffixnames value values
-"hi def link kerboContainerAttr Label
+hi def link kerboContainerAttr Label
 
 let b:current_syntax = "kerboscript"
 if main_syntax == "kerboscript"
