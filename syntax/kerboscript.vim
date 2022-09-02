@@ -1,23 +1,11 @@
-" kerboscript.nvim: Syntax highlighting for kerboscript
-" Copyright (C) 2022, VukanJ
-" 
-" This program is free software; you can redistribute it and/or modify
-" it under the terms of the GNU General Public License as published by
-" the Free Software Foundation; either version 2 of the License, or
-" (at your option) any later version.
-" 
-" This program is distributed in the hope that it will be useful,
-" but WITHOUT ANY WARRANTY; without even the implied warranty of
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-" GNU General Public License for more details.
-" 
-" You should have received a copy of the GNU General Public License along
-" with this program; if not, write to the Free Software Foundation, Inc.,
-" 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-if exists("b:current_syntax")
-    finish
+if !exists("main_syntax")
+    if exists("b:current_syntax")
+        finish
+    endif
+    let main_syntax = "kerboscript"
 endif
 
+syntax sync fromstart
 syntax case ignore
 
 syntax match commonOperator "\(+\|/\|=\|<>\|\:\|-\|\^\|\*\|<\|>\|>=\|<=\|\[\|\]\)"
@@ -31,8 +19,16 @@ hi link endOfCommand Special
 syn keyword kerboBoolean true false on off
 hi def link kerboBoolean Boolean
 
+" obvious syntax errors
+syntax match MissingPoint ".*[^\.^\{^\}]\s*$"
+hi link MissingPoint Error
+
+" Empty lines are fine
+syntax match EmptyLine "^\s*$"
+hi link EmptyLine Normal
+
 " Comments
-syn match   kerboComment "//.*" contains=kerboTODO
+syn match   kerboComment ".*//.*$" contains=kerboTODO
 hi def link kerboComment Comment
 
 " Conditionals
@@ -180,3 +176,6 @@ syn keyword kerboContainerAttr add atend case casesensitive clear copy dump empt
 "hi def link kerboContainerAttr Label
 
 let b:current_syntax = "kerboscript"
+if main_syntax == "kerboscript"
+    unlet main_syntax
+endif
