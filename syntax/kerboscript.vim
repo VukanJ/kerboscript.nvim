@@ -20,7 +20,7 @@ endif
 
 syntax case ignore
 
-syntax match commonOperator "\(+\|=\|<>\|\:\|-\|\^\|\*\|<\|>\|>=\|<=\|\[\|\]\)"
+syntax match commonOperator "\(+\|/\|=\|<>\|\:\|-\|\^\|\*\|<\|>\|>=\|<=\|\[\|\]\)"
 syntax match baseDelimiter ","
 syntax match endOfCommand "\."
 hi link commonOperator Operator
@@ -89,7 +89,7 @@ syn keyword kerboTodo contained TODO
 hi def link kerboTodo Todo
 
 " Types
-syn keyword kerboType function v r vector direction la when thentlng parameter facing up prograde retrograde steering forevector vector topvector upvector starvector rightvector
+syn keyword kerboType function v r vector direction la when thentlng parameter facing up prograde retrograde steering throttle sas forevector vector topvector upvector starvector rightvector
 hi def link kerboType Type
 
 " """"""""""""""""""""
@@ -100,8 +100,16 @@ syn keyword kerboStructure tostring hassuffix suffixnames isserializable typenam
 hi def link kerboStructure Label
 
 " Part attributes
-syn keyword kerboPartAttr name title mass drymass wetmass tag controlfrom stage cid uid rotation position facing bounds resources targetable ship getmodule getmodulebyindex modules allmodules hasmodule parent hasparent decoupler separator decoupledin separatedin hasphysics children symmetrycount removesymmetry symmetrypartner partsnamed partsnamedpattern partstitled partstitledpattern partstagged partstaggedpattern partsdubbed partsdubbedpattern modulesnamed alltaggedparts
+syn keyword kerboPartAttr name allmodules alltaggedparts bounds children cid controlfrom decoupledin decoupler drymass facing getmodule getmodulebyindex hasmodule hasparent hasphysics mass modules modulesnamed parent partsdubbed partsdubbedpattern partsnamed partsnamedpattern partstagged partstaggedpattern partstitled partstitledpattern position removesymmetry resources rotation separatedin separator ship stage symmetrycount symmetrypartner tag targetable title uid wetmass
 hi def link kerboPartAttr Label
+
+" Math attributes
+syn keyword kerboMathAttr x y z mag normalized sqrtmagnitude direction vec r q heading lookdirup angleaxis rotatefromto
+hi def link kerboMathAttr Label
+
+" Geo attributes
+syn keyword kerboGeoAttr body lat lng distance terrainheight heading bearing position altitudeposition velocity altitudevelocity
+hi def link kerboGeoAttr Label
 
 " Resource attributes
 syn keyword kerboResourceAttr name amount capacity density parts fuelflow maxfuelflow requiredfuelflow massflow maxmassflow ratio
@@ -111,12 +119,16 @@ hi def link kerboResourceAttr Label
 syn keyword kerboKerbalAttr name gender experience trait tourist part
 hi def link kerboKerbalAttr Label
 
+" Node attributes
+syn keyword kerboNodeAttr node add remove nextnode hasnode
+hi def link kerboNodeAttr Label
+
 " Docking attributes
 syn keyword kerboDockingAttr acquirerange acquireforce acquiretorque reengageddistance dockedshipname nodeposition nodetype portfacing state undock partner haspartner targetable
 hi def link kerboDockingAttr Label
 
 " Engine attributes
-syn keyword kerboEngineAttr activate shutdown thrustlimit maxthrust maxthrustat thrust availablethrust availablethrustat possiblethrust possiblethrustat fuelflow maxfuelflow massflow maxmassflow isp ispat vacuumisp visp sealevelisp slisp flameout ignition allowrestart allowshutdown throttlelock multimode modes mode togglemode primarymode autoswitch hasgimbal gimbal ullage fuelstability pressurefed ignitions minthrottle config consumedresources
+syn keyword kerboEngineAttr activate allowrestart allowshutdown autoswitch availablethrust availablethrustat config consumedresources flameout fuelflow fuelstability gimbal hasgimbal ignition ignitions isp ispat massflow maxfuelflow maxmassflow maxthrust maxthrustat minthrottle mode modes multimode possiblethrust possiblethrustat pressurefed primarymode sealevelisp shutdown slisp throttlelock thrust thrustlimit togglemode ullage vacuumisp visp
 hi def link kerboEngineAttr Label
 
 " Gimbal attributes
@@ -128,10 +140,43 @@ syn keyword kerboProcAttr mode activate deactivate tag volume bootfilename conne
 hi def link kerboProcAttr Label
 
 " RCS attributes
-syn keyword kerboRCSAttr enabled yawenabled pitchenabled rollenabled foreenabled starboardenabled topenabled forebythrottle fullthrust thrustlimit deadband maxthrust maxthrustat availablethrust availablethrustat maxfuelflow maxmassflow isp ispat vacuumisp visp sealevelisp slisp flameout thrustvectors consumedresources
+syn keyword kerboRCSAttr availablethrust availablethrustat consumedresources deadband enabled flameout forebythrottle foreenabled fullthrust isp ispat maxfuelflow maxmassflow maxthrust maxthrustat pitchenabled rollenabled sealevelisp slisp starboardenabled thrustlimit thrustvectors topenabled vacuumisp visp yawenabled
 hi def link kerboRCSAttr Label
 
+" Resource attributes
+syn keyword kerboResourceAttr name amount density capacity toggleable enabled
+hi def link kerboResourceAttr Label
+
+" Science attributes
+syn keyword kerboScienceAttr title sciencevalue transmitvalue dataamount deploy reset transmit() dump inoperable rerunnable deployed hasdata data active type display powerconsumption toggle
+hi def link kerboScienceAttr Label
+
+" Staging attributes
+syn keyword kerboStageAttr ready number resources resourceslex nextdecoupler nextseparator deltav 	deltav
+hi def link kerboStageAttr Label
+
+" Vessel attributes
+syn keyword kerboVesselAttr acc airspeed alltaggedparts angularmomentum angularvel availablethrust availablethrustat bearing bounds burntime connection control controlpart crew crewcapacity deltav deltavasl deltavvacuum dockingports drymass dynamicpressure elements facing grav groundspeed heading isdead light loaddistance loaded mass maxthrust maxthrustat messages modulesingroup modulesnamed name parts partsdubbed partsdubbedpattern partsingroup partsnamed partsnamedpattern partstagged partstaggedpattern partstitled partstitledpattern patches pres q resources rootpart sensors shipname sizeclass stagedeltav stagenum starttracking status stoptracking temp termvelocity type unpacked verticalspeed wetmass
+hi def link kerboVesselAttr Label
+
+" Communication attributes
+syn keyword kerboCommAttr isconnected delay destination sendmessage sentat receivedat sender hassender content empty length pop peek clear push
+hi def link kerboCommAttr Label
+
+" Orbit attributes
+syn keyword kerboOrbitAttr altitude apoapsis argumentofperiapsis body direction distance eccentricity epoch eta geoposition hasbody hasnextpatch hasobt hasorbit inclination lan latitude longitude longitudeofascendingnode meananomalyatepoch name nextpatch nextpatcheta north obt orbit patches periapsis period position prograde retrograde semimajoraxis semiminoraxis srfprograde srfretrograde transition trueanomaly up velocity
+hi def link kerboOrbitAttr Label
+
+" Planet attributes
+syn keyword kerboPlanetAttr adbidx adiabaticindex altitude altitudeof altitudepressure altitudetemperature alttemp angularvel atm body description exists geopositionlatlng geopositionof hasocean hassolidsurface height mass molarmass mu name orbitingchildren oxygen radius rotationangle rotationperiod scale sealevelpressure soiradius
+hi def link kerboPlanetAttr Label
+
 " Various attributes
-syn keyword kerboVariousAttr vessel element tag version currentvolume messages description editor launchsite cost partcount dockingports resources
+syn keyword kerboVariousAttr vessel element tag version currentvolume messages description editor launchsite cost partcount dockingports resources highlight, rgba
 hi def link kerboVariousAttr Label
+
+" Container attributes
+syn keyword kerboContainerAttr add atend case casesensitive clear copy dump empty find findlast haskey hassuffix hasvalue index indexof insert iterator join keys lastindexof length next peek pop push remove reset reverseiterator start step stop sublist suffixnames value values
+"hi def link kerboContainerAttr Label
+
 let b:current_syntax = "kerboscript"
