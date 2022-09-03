@@ -100,7 +100,7 @@ syn keyword kerboPartAttr name allmodules alltaggedparts bounds children cid con
 hi def link kerboPartAttr Label
 
 " Universal structures
-syn keyword kerboUstructureAttr ship body
+syn keyword kerboUstructureAttr ship body target
 hi def link kerboUstructureAttr Constant
 
 " Math attributes
