@@ -8,8 +8,8 @@ endif
 syntax sync fromstart
 syntax case ignore
 
-syntax match commonOperator "\(+\|/\|=\|<>\|\:\|-\|\^\|\*\|<\|>\|>=\|<=\|\[\|\]\)"
-syntax match baseDelimiter ","
+syntax match commonOperator "\(+\|/\|=\|<>\|-\|\^\|\*\|<\|>\|>=\|<=\|\[\|\]\)"
+syntax match baseDelimiter ",\|:"
 syntax match endOfCommand "\."
 hi link commonOperator Operator
 hi link baseDelimiter Special
@@ -53,7 +53,7 @@ syn match   kerboNumber "\<\d\+\>"
 hi def link kerboNumber Number
 
 " Functions
-syn keyword kerboFunction stage clearscreen log rename delete edit run runpath runoncepath compile reboot shutdown batch deploy print
+syn keyword kerboFunction clearscreen log rename delete edit runpath runoncepath compile reboot shutdown batch deploy
 hi def link kerboFunction Function
 
 " Keywords
@@ -65,7 +65,7 @@ syn keyword kerboOperator abs ceiling floor ln log10 mod min max random randomse
 hi def link kerboOperator Operator
 
 " Statements
-syn keyword kerboStatement wait break preserve
+syn keyword kerboStatement wait break preserve stage run print
 hi def link kerboStatement Statement
 
 " Structures
@@ -96,15 +96,19 @@ syn keyword kerboStructure tostring hassuffix suffixnames isserializable typenam
 hi def link kerboStructure Label
 
 " Part attributes
-syn keyword kerboPartAttr name allmodules alltaggedparts bounds children cid controlfrom decoupledin decoupler drymass facing getmodule getmodulebyindex hasmodule hasparent hasphysics mass modules modulesnamed parent partsdubbed partsdubbedpattern partsnamed partsnamedpattern partstagged partstaggedpattern partstitled partstitledpattern position removesymmetry resources rotation separatedin separator ship stage symmetrycount symmetrypartner tag targetable title uid wetmass
+syn keyword kerboPartAttr name allmodules alltaggedparts bounds children cid controlfrom decoupledin decoupler drymass facing getmodule getmodulebyindex hasmodule hasparent hasphysics mass modules modulesnamed parent partsdubbed partsdubbedpattern partsnamed partsnamedpattern partstagged partstaggedpattern partstitled partstitledpattern position removesymmetry resources rotation separatedin separator stage symmetrycount symmetrypartner tag targetable title uid wetmass
 hi def link kerboPartAttr Label
+
+" Universal structures
+syn keyword kerboUstructureAttr ship body
+hi def link kerboUstructureAttr Constant
 
 " Math attributes
 syn keyword kerboMathAttr x y z mag normalized sqrtmagnitude direction vec r q heading lookdirup angleaxis rotatefromto
 hi def link kerboMathAttr Label
 
 " Geo attributes
-syn keyword kerboGeoAttr body lat lng distance terrainheight heading bearing position altitudeposition velocity altitudevelocity
+syn keyword kerboGeoAttr lat lng distance terrainheight heading bearing position altitudeposition velocity altitudevelocity
 hi def link kerboGeoAttr Label
 
 " Resource attributes
@@ -160,11 +164,11 @@ syn keyword kerboCommAttr isconnected delay destination sendmessage sentat recei
 hi def link kerboCommAttr Label
 
 " Orbit attributes
-syn keyword kerboOrbitAttr altitude apoapsis argumentofperiapsis body direction distance eccentricity epoch eta geoposition hasbody hasnextpatch hasobt hasorbit inclination lan latitude longitude longitudeofascendingnode meananomalyatepoch name nextpatch nextpatcheta north obt orbit patches periapsis period position prograde retrograde semimajoraxis semiminoraxis srfprograde srfretrograde transition trueanomaly up velocity
+syn keyword kerboOrbitAttr altitude apoapsis argumentofperiapsis direction distance eccentricity epoch eta geoposition hasbody hasnextpatch hasobt hasorbit inclination lan latitude longitude longitudeofascendingnode meananomalyatepoch name nextpatch nextpatcheta north obt orbit patches periapsis period position prograde retrograde semimajoraxis semiminoraxis srfprograde srfretrograde transition trueanomaly up velocity
 hi def link kerboOrbitAttr Label
 
 " Planet attributes
-syn keyword kerboPlanetAttr adbidx adiabaticindex altitude altitudeof altitudepressure altitudetemperature alttemp angularvel atm body description exists geopositionlatlng geopositionof hasocean hassolidsurface height mass molarmass mu name orbitingchildren oxygen radius rotationangle rotationperiod scale sealevelpressure soiradius
+syn keyword kerboPlanetAttr adbidx adiabaticindex altitude altitudeof altitudepressure altitudetemperature alttemp angularvel atm description exists geopositionlatlng geopositionof hasocean hassolidsurface height mass molarmass mu name orbitingchildren oxygen radius rotationangle rotationperiod scale sealevelpressure soiradius
 hi def link kerboPlanetAttr Label
 
 " Various attributes
@@ -174,6 +178,11 @@ hi def link kerboVariousAttr Label
 " Container attributes
 syn keyword kerboContainerAttr add atend case casesensitive clear copy dump empty find findlast haskey hassuffix hasvalue index indexof insert iterator join keys lastindexof length next peek pop push remove reset reverseiterator start step stop sublist suffixnames value values
 hi def link kerboContainerAttr Label
+"
+" Celestial bodies
+syn keyword kerboCelestialBody kerbin mun minmus sun moho eve gilly duna ike dres jool laythe vall tylo bop pol eeloo
+hi def link kerboCelestialBody Define
+
 
 let b:current_syntax = "kerboscript"
 if main_syntax == "kerboscript"
